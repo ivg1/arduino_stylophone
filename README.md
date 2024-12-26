@@ -4,7 +4,7 @@ A synth-like keyboard with 8 set keys to represent one octave with 7 octave pitc
 ## Installing
 1. Download this repository as a zip file
 2. Extract the contents into a folder (e.g. synth_keyboard)
-3. Then you need to download the libraries...
+3. Then you need to download the libraries (shown below)
 4. Wire the arduino as shown here: https://wokwi.com/projects/418328757006720001
 5. After that just open the .ino file and upload to the arduino
 6. You're all set
