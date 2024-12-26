@@ -26,10 +26,6 @@ void setup() {
   
   lcd.print("Set octave: ");
   lcd.print(curr_octave+1);
-  for (int i : notes) {
-    Serial.print(i);
-    Serial.print(", ");
-  }
 }
 
 void loop() {
