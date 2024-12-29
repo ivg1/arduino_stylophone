@@ -242,23 +242,20 @@ void play_recorded_notes() {
     char note_letter = note.charAt(0);
     int octave = note.substring(1).toInt();
 
+    int shift = 0;
     switch (note_letter) {
-      case 'C': note_value = NOTE_C1; break;
-      case 'D': note_value = NOTE_D1; break;
-      case 'E': note_value = NOTE_E1; break;
-      case 'F': note_value = NOTE_F1; break;
-      case 'G': note_value = NOTE_G1; break;
-      case 'A': note_value = NOTE_A1; break;
-      case 'B': note_value = NOTE_B1; break;
-      case 'V': note_value = NOTE_C2; break;
+      case 'C': note_value = NOTE_C1; shift = 0; break;
+      case 'D': note_value = NOTE_D1; shift = 1; break;
+      case 'E': note_value = NOTE_E1; shift = 2; break;
+      case 'F': note_value = NOTE_F1; shift = 3; break;
+      case 'G': note_value = NOTE_G1; shift = 4; break;
+      case 'A': note_value = NOTE_A1; shift = 5; break;
+      case 'B': note_value = NOTE_B1; shift = 6; break;
+      case 'V': note_value = NOTE_C2; shift = 7; break;
       default: continue;
     }
-    int shift = 0;
-    if (note_letter != 'V') {
-      shift = find_index(note_value)+(8*(octave-1))-2;
-    } else {
-      shift = find_index(note_value)+(8*(octave-2))-2;
-    }
+    
+    shift += (octave - 1) * 7;
 
     if (digitalRead(play_pin) == LOW) {
       break;
