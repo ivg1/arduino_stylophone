@@ -133,7 +133,22 @@ bool is_note_play = false;
 void record_notes() {
   //same as in freeplay but with changes
   note_pressed = false;
+  if (digitalRead(lower_octave) == LOW && curr_octave != 0) { 
+    curr_octave--; 
 
+    lcd_message(curr_mode, "Set octave: " + String(curr_octave+1));
+
+    noTone(speaker_pin);
+    delay(200); 
+  } 
+  if (digitalRead(add_octave) == LOW && curr_octave != 6) { 
+    curr_octave++; 
+
+    lcd_message(curr_mode, "Set octave: " + String(curr_octave+1));
+    
+    noTone(speaker_pin);
+    delay(200);
+  }
   for (int key_pin = 2; key_pin < 10; key_pin++) {
     int read_pin = digitalRead(key_pin);
 
@@ -164,7 +179,7 @@ void record_notes() {
         note_start_time = millis();
         is_note_play = true;
 
-        lcd_message(curr_mode, "Recording: " + current_note);
+        lcd_message(curr_mode, "recording: " + current_note);
         tone(speaker_pin, notes[note_value]);
       }
       break;
@@ -178,7 +193,7 @@ void record_notes() {
     last_rec_note = "";
     is_note_play = false;
 
-    lcd_message(curr_mode, "Recording: stop");
+    lcd_message(curr_mode, "recording: stop");
     noTone(speaker_pin);
   }
 
