@@ -6,10 +6,8 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 int note_pins[] = {2,3,4,5,6,7,8,9};
 
-String curr_mode = "Freeplay"; //modes: freeplay, playing, recording.
+String curr_mode = "Freeplay";
 
-//due to sd, have to use analog pins as digital.
-//left to right: Play, Stop, Rec
 int play_pin = 0;
 int rec_pin = 1;
 int freeplay_pin = A3;
@@ -27,10 +25,8 @@ const int chipSelect = 10;
 bool sd_init = false;
 File rec_file;
 
-//turn rec/play on/off
 bool record_state = false;
 bool play_state = false;
-
 
 void lcd_message(String msg1, String msg2) {
   lcd.clear();
@@ -59,12 +55,10 @@ void setup() {
   pinMode(rec_pin, INPUT_PULLUP);
   pinMode(freeplay_pin, INPUT_PULLUP);
   
-  //very fake startup ahh
   lcd_message("Loaded.", "Press any key...");
   delay(1000);
 }
 
-//the modes:
 String prev_note_letter = "";
 String note_letter = "";
 bool prev_state = false;
@@ -196,7 +190,6 @@ void record_notes() {
     lcd_message(curr_mode, "recording: stop");
     noTone(speaker_pin);
   }
-
 }
 
 String read_line(File &file) {
@@ -209,14 +202,6 @@ String read_line(File &file) {
     line += c;
   }
   return line;
-}
-
-int find_index(int note_value) {
-  int j = 0;
-  for (int i : notes) {
-    if (i == note_value) return j;
-    j++; 
-  }
 }
 
 void play_recorded_notes() {
